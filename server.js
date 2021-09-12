@@ -30,7 +30,7 @@ app.post('/api/notes', (req, res) => {
 });
 
 // Delete notes function
-app.delete('/api/notes:id', (req, res) => {
+app.delete('/api/notes/:id', (req, res) => {
   const notes = JSON.parse(fs.readFileSync('./db/db.json'));
   const deleteNote = notes.filter((rmvNote) => rmvNote.id != req.params.id)
   fs.writeFileSync('./db/db.json', JSON.stringify(deleteNote))
@@ -44,7 +44,7 @@ app.get('/', (req, res) =>
 
 // Get route for note HTML
 app.get('/notes', (req, res) =>
-  res.sendFile(path.join(__dirname, '/public/index.html'))
+  res.sendFile(path.join(__dirname, '/public/notes.html'))
 );
 
 app.listen(PORT, () =>
